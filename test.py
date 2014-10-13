@@ -6,9 +6,10 @@ import markdown
 
 text = """
 <a href="http://google.cz/search?q=jejda&hl=cz">ahoj</a>
-QQQ [[!gg ah&oj]](jejda) AAAA
 
-WWW [[!gg ahoj]]() AAAA
+QQQ [[!gg ahoj]](jejda) AAAA
+
+WWW [[!gi obrazky]](robot) AAAA
 
 [[!gg ahoj jojo]](jejda) [[!gg ahoj]]()
 [[!dd ahoj

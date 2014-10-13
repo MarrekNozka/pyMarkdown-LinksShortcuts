@@ -1,13 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
-# Soubor:  shortcut.py
-# Datum:   12.10.2014 00:06
-# Autor:   Marek Nožka, nozka <@t> spseol <d.t> cz
-# Autor:   Marek Nožka, marek <@t> tlapicka <d.t> net
+"""
+# Date:    12.10.2014 00:06
+# Author:  Marek Nožka, marek <@t> tlapicka <d.t> net
 # Licence: GNU/GPL
-# Úloha:
-# Popis:
-############################################################################
+
+"""
 from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
@@ -15,16 +13,18 @@ from __future__ import generators
 
 import markdown
 
-__version__ = "0.1"
+__version__ = "0.2"
 
 
 class LinksShortcuts(markdown.inlinepatterns.Pattern):
     url = {
         'gg': 'http://www.google.com/search?q={0}',
-        'gi': '',
-        'enwk': '',
-        'cswk': '',
-        'dd': 'http://duckduckgo.com/?q={}'
+        'gi': 'http://google.com/search?q={0}&tbm=isch',
+        'dd': 'http://duckduckgo.com/?q={0}',
+        'enwk': 'http://en.wikipedia.com/wiki/{0}',
+        'cswk': 'http://cs.wikipedia.com/wiki/{0}',
+        'ipynb': 'http://nbviewer.ipython.org/urls/raw.github.com/tlapicka/'
+                 'IPythonNotebooks/master/{0}.ipynb',
     }
 
     def __init__(self):
@@ -37,7 +37,7 @@ class LinksShortcuts(markdown.inlinepatterns.Pattern):
         if m.group(4):
             el.attrib['href'] = self.url[m.group(2)].format(m.group(4))
         else:
-            el.attrib['href'] = self.url[m.group(2)].format(m.group(4))
+            el.attrib['href'] = self.url[m.group(2)].format(m.group(3))
         return el
 
 
@@ -47,7 +47,7 @@ class Shortcuts(markdown.Extension):
 
 
 def makeExtension(configs=None):
-    return ShortCuts(configs=configs)
+    return Shortcuts(configs=configs)
 
 
 if __name__ == "__main__":
